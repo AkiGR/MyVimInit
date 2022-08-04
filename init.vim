@@ -12,3 +12,5 @@ set guioptions-=T
 set guioptions+=R
 " 対応する括弧を強調表示
 set showmatch
+" シンタックスハイライト
+syntax on
