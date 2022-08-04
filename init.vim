@@ -8,3 +8,5 @@ set shiftwidth=2
 set guioptions-=T
 " 右スクロールバーを非表示
 set guioptions+=R
+" 対応する括弧を強調表示
+set showmatch
