@@ -6,3 +6,5 @@ hi Comment ctermfg=3
 set shiftwidth=2
 " ツールバーを非表示にする
 set guioptions-=T
+" 右スクロールバーを非表示
+set guioptions+=R
