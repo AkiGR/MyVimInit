@@ -14,3 +14,8 @@ set guioptions+=R
 set showmatch
 " シンタックスハイライト
 syntax on
+
+" Vim Plug
+call plug#begin()
+
+call plug#end()
