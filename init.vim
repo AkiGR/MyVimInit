@@ -4,4 +4,5 @@ set number
 hi Comment ctermfg=3
 " インデント幅
 set shiftwidth=2
-
+" ツールバーを非表示にする
+set guioptions-=T
