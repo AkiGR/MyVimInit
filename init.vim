@@ -7,7 +7,9 @@ Plug 'ulwlu/elly.vim'
 Plug 'preservim/nerdtree'
 Plug 'pantharshit00/vim-prisma'
 Plug 'cocopon/iceberg.vim'
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-tsserver', {'tag': '1.3.7', 'do': 'yarn install --frozen-lockfile'} 
 Plug 'yaegassy/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile', 'branch': 'feat/support-v3-and-use-server-pkg'}
 Plug 'scalameta/nvim-metals'
 Plug 'mattn/emmet-vim'
