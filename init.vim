@@ -1,6 +1,8 @@
 " Vim Plug
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
+Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'ulwlu/elly.vim'
@@ -17,13 +19,17 @@ Plug 'mattn/emmet-vim'
 call plug#end()
 
 let g:elly_termmode="cterm"
-set encoding=utf-8
+set encoding=utf8
 set fileencodings=utf-8
 set fileformats=unix,dos,mac
 lang en_US.UTF-8
 
-
+let g:webdevicons_enable_nerdtree = 1
+let g:airline_powerline_fonts = 1
 set completeopt=menuone,noinsert
+set guifont=DroidSansMono\ Nerd\ Font:h11
+
+
 set number
 set expandtab
 set tabstop=2
