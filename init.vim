@@ -1,34 +1,102 @@
-" Vim Plug
+" ========== plug.vimがインストールされていなければインストールする ========== "
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+" ========== vim-plug ========== "
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
-Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'ulwlu/elly.vim'
-Plug 'preservim/nerdtree'
-Plug 'pantharshit00/vim-prisma'
-Plug 'cocopon/iceberg.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'yaegassy/coc-tailwindcss', {'do': 'yarn install --frozen-lockfile', 'branch': 'feat/support-v3-and-use-server-pkg'}
-Plug 'scalameta/nvim-metals'
-Plug 'mattn/emmet-vim'
+Plug 'ryanoasis/vim-devicons'                   " アイコンを表示する
+Plug 'mhinz/vim-startify'                       " スタート画面を表示
+Plug 'nvim-lua/plenary.nvim'                    " 
+Plug 'nvim-telescope/telescope.nvim'            " ファイル検索
+Plug 'ulwlu/elly.vim'                           " 
+Plug 'preservim/nerdtree'                       " ファイルディレクトリを表示
+Plug 'pantharshit00/vim-prisma'                 " 
+Plug 'cocopon/iceberg.vim'                      " テーマカラー
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " コード補完
+Plug 'mattn/emmet-vim'                          " 
 
 call plug#end()
 
-let g:elly_termmode="cterm"
+
+" ========== startify ========== "
+let g:startify_files_number = 7                      " スタート画面に表示するファイル数
+let g:startify_bookmarks = ["~/.vimrc", "~/.gvimrc"] " スタート画面にブックマークするファイル
+let g:startify_padding_left = 45                     " 文字を寄せる
+let g:startify_session_persistence = 1               " 
+let g:startify_enable_special = 0                    " 
+let g:startify_change_to_vcs_root = 1                " 
+let g:startify_lists = [
+    \ { 'type': 'dir'       },
+    \ { 'type': 'files'     },
+    \ { 'type': 'sessions'  },
+    \ { 'type': 'bookmarks' },
+    \ { 'type': 'commands' },
+    \ ]
+
+" bookmark examples
+let  g:startify_bookmarks =  [
+    \ {'v': '~/.config/nvim/init.vim'},
+    \ {'d': '~/.dotfiles' }
+    \ ]
+
+" custom commands
+let g:startify_commands = [
+    \ {'ch':  ['Health Check', ':checkhealth']},
+    \ {'ps': ['Plugins status', ':PlugStatus']},
+    \ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
+    \ {'uc': ['Update coc Plugins', ':CocUpdate']},
+    \ {'h':  ['Help', ':help']},
+    \ ]
+" ASCII ARTを真ん中寄せする
+" :h startifyを参照
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
+    let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+
+" スタート画面に表示するロゴ
+let g:startify_custom_header = s:filter_header([
+      \ '',
+      \ '                                                                                                    ▟▙            ',
+      \ '                                                                                                    ▝▘            ',
+      \ '                                                            ██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+      \ '                                                            ██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+      \ '                                                            ██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+      \ '                                                            ██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+      \ '                                                            ▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+      \ '',
+      \ '',
+      \ '',
+      \ ])
+
+" Vim color theme
+"let g:elly_termmode="cterm"
+"let g:airline_theme='elly'
+
+" 文字コード
+set statusline+=%{get(b:,'gitsigns_status','')}
 set encoding=utf8
+
 set fileencodings=utf-8
 set fileformats=unix,dos,mac
 lang en_US.UTF-8
-
 let g:webdevicons_enable_nerdtree = 1
 let g:airline_powerline_fonts = 1
 set completeopt=menuone,noinsert
 set guifont=DroidSansMono\ Nerd\ Font:h11
 
-
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 set number
+
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -43,7 +111,6 @@ set shortmess+=c
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-
 
 " syntax colors 
 syntax enable 
@@ -65,7 +132,6 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
-
 
 " telescope
 " Find files using Telescope command-line sugar.
