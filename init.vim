@@ -18,7 +18,7 @@ Plug 'pantharshit00/vim-prisma'                 "
 Plug 'cocopon/iceberg.vim'                      " テーマカラー
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " コード補完
 Plug 'mattn/emmet-vim'                          " 
-
+Plug 'vim-airline/vim-airline'                  " ステータスバーの変更
 call plug#end()
 
 
